@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:memo_app/pages/memo_set.dart';
+import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:memo_app/widgets/memo_list.dart';
 import 'package:provider/provider.dart';
 import 'package:memo_app/providers/personal_info_provider.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
 
   @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
+  @override
   Widget build(BuildContext context) {
+    MemoInfo memoInfo = Provider.of<MemoInfo>(context);
     return Scaffold(
       backgroundColor: const Color(0xFFFFFFFF),
       appBar: AppBar(
@@ -34,11 +41,19 @@ class Home extends StatelessWidget {
         ),
         actions: [
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.delete_outline,
-              color: Colors.black,
+              color: (memoInfo.deleteMode == false) ? Colors.black : Colors.red,
             ),
-            onPressed: () {},
+            onPressed: () {
+              setState(() {
+                if (memoInfo.deleteMode == false) {
+                  memoInfo.removeMode();
+                } else {
+                  memoInfo.removeMemo('test', 'test');
+                }
+              });
+            },
           )
         ],
       ),

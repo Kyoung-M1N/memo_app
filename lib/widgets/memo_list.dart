@@ -13,19 +13,32 @@ class MemoList extends StatelessWidget {
             ? const Center(child: Text('아직 메모가 없습니다'))
             : Builder(
                 builder: (context) {
-                  List<Widget> memosList = [];
+                  List<Widget> memosList1 = [];
+                  List<Widget> memosList2 = [];
                   value.memos.forEach(
                     (key, value) {
-                      memosList.add(memo(context: context, memo: value));
+                      if (memosList2.length == memosList1.length) {
+                        memosList1.add(memo(context: context, memo: value));
+                      } else {
+                        memosList2.add(memo(context: context, memo: value));
+                      }
                     },
                   );
 
                   return Container(
                     padding: const EdgeInsets.all(4),
                     child: SingleChildScrollView(
-                      child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: memosList),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: memosList1),
+                          Column(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              children: memosList2),
+                        ],
+                      ),
                     ),
                   );
                 },
@@ -35,10 +48,21 @@ class MemoList extends StatelessWidget {
   }
 }
 
-Widget memo({required context, required Memo memo}) => Container(
-      padding: const EdgeInsets.all(5),
-      width: (MediaQuery.of(context).size.width / 2) - 8,
-      height: (MediaQuery.of(context).size.width / 2) - 8,
+Widget memo({required context, required Memo memo}) {
+  MemoInfo memoInfo = Provider.of<MemoInfo>(context);
+  bool isSelected = false;
+  return Container(
+    padding: const EdgeInsets.all(5),
+    width: (MediaQuery.of(context).size.width / 2) - 8,
+    height: (MediaQuery.of(context).size.width / 2) - 8,
+    child: InkWell(
+      borderRadius: BorderRadius.circular(10),
+      onTap: () {
+        if (memoInfo.deleteMode == true) {
+          isSelected = (isSelected) ? false : true;
+          print(isSelected);
+        }
+      },
       child: Card(
         child: Container(
           padding: const EdgeInsets.all(5),
@@ -57,4 +81,6 @@ Widget memo({required context, required Memo memo}) => Container(
           borderRadius: BorderRadius.circular(10),
         ),
       ),
-    );
+    ),
+  );
+}

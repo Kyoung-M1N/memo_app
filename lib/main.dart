@@ -26,21 +26,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // showSemanticsDebugger:true,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Consumer2<PersonalInfo, MemoInfo>(
-        builder: (context, personalInfo, memoInfo, child) {
-          personalInfo.loadinfo();
-          memoInfo.loadMemo();
-          return (personalInfo.isFirst == true)
-              ? const FirstVisit()
-              : const Home();
-        },
-      ),
+    return Consumer2<PersonalInfo, MemoInfo>(
+      builder: (context, personalInfo, memoInfo, child) {
+        personalInfo.loadinfo();
+        memoInfo.loadMemo();
+        return MaterialApp(
+            // showSemanticsDebugger:true,
+            debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              primarySwatch: Colors.blue,
+            ),
+            home: (personalInfo.isFirst == true)
+                ? const FirstVisit()
+                : const Home());
+      },
     );
   }
 }

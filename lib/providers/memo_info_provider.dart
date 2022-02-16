@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 
 class MemoInfo extends ChangeNotifier {
   Map<String, Memo> memos = {};
+  bool deleteMode = false;
 
   void addMemo(String title, String mainText, int year, int month, int day,
       int hour, int minute) async {
@@ -17,7 +18,6 @@ class MemoInfo extends ChangeNotifier {
           minute: minute)
     });
     final prefs = await SharedPreferences.getInstance();
-    // prefs.
     await prefs.setStringList('keys', memos.keys.toList());
     await prefs.setStringList(title, [
       mainText,
@@ -30,8 +30,13 @@ class MemoInfo extends ChangeNotifier {
     notifyListeners();
   }
 
-  void removeMemo() async {
+  void removeMode() {
+    deleteMode = true;
+  }
+
+  void removeMemo(String key, String title) async {
     final prefs = await SharedPreferences.getInstance();
+    deleteMode = false;
   }
 
   void loadMemo() async {

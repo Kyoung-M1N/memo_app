@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:memo_app/providers/memo_info_provider.dart';
+import 'package:memo_app/widgets/palette.dart';
 import 'package:provider/provider.dart';
 
 class MemoSet extends StatefulWidget {
@@ -81,6 +82,7 @@ class _MemoSetState extends State<MemoSet> {
                     },
                   ),
                 ),
+                Palette(onChanged: (value){print(value.toString());},),
                 SizedBox(
                     width: MediaQuery.of(context).size.width - 16,
                     height: 200,
@@ -94,7 +96,7 @@ class _MemoSetState extends State<MemoSet> {
                       });
                     })),
                 Container(
-                  padding: const EdgeInsets.fromLTRB(0, 40, 0, 10),
+                  margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                   child: TextButton(
                     style: const ButtonStyle(
                         splashFactory: NoSplash.splashFactory),
