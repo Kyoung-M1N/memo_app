@@ -64,6 +64,7 @@ Widget memo({required context, required Memo memo}) {
         }
       },
       child: Card(
+        color: Color(int.parse(memo.color.substring(6,16))),
         child: Container(
           padding: const EdgeInsets.all(5),
           child: Column(
@@ -72,8 +73,12 @@ Widget memo({required context, required Memo memo}) {
               Text(
                 memo.title,
                 style: const TextStyle(fontSize: 25),
+              ),SizedBox(height: 3,),
+              Text(
+                memo.mainText,
+                maxLines: 9,
+                overflow: TextOverflow.ellipsis,
               ),
-              Text(memo.mainText),
             ],
           ),
         ),

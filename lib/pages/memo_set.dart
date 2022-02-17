@@ -14,6 +14,7 @@ class MemoSet extends StatefulWidget {
 class _MemoSetState extends State<MemoSet> {
   String? title;
   String? mainText;
+  String color = 'Color(0xffffffff)';
   int year = DateTime.now().year;
   int month = DateTime.now().month;
   int day = DateTime.now().day;
@@ -82,7 +83,12 @@ class _MemoSetState extends State<MemoSet> {
                     },
                   ),
                 ),
-                Palette(onChanged: (value){print(value.toString());},),
+                Palette(
+                  onChanged: (value) {
+                    color = value.toString();
+                    // print();
+                  },
+                ),
                 SizedBox(
                     width: MediaQuery.of(context).size.width - 16,
                     height: 200,
@@ -102,8 +108,14 @@ class _MemoSetState extends State<MemoSet> {
                         splashFactory: NoSplash.splashFactory),
                     onPressed: (title != null && mainText != null)
                         ? () {
-                            memoInfo.addMemo(title!, mainText!, year, month,
-                                day, hour, minute);
+                            String key = DateTime.now().year.toString() +
+                                DateTime.now().month.toString() +
+                                DateTime.now().day.toString() +
+                                DateTime.now().hour.toString() +
+                                DateTime.now().minute.toString() +
+                                DateTime.now().second.toString();
+                            memoInfo.addMemo(key, title!, mainText!, color, year,
+                                month, day, hour, minute);
                             Navigator.pop(context);
                           }
                         : null,

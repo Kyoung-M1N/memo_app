@@ -5,12 +5,14 @@ class MemoInfo extends ChangeNotifier {
   Map<String, Memo> memos = {};
   bool deleteMode = false;
 
-  void addMemo(String title, String mainText, int year, int month, int day,
-      int hour, int minute) async {
+  void addMemo(String key, String title, String mainText, String color, int year, int month,
+      int day, int hour, int minute) async {
     memos.addAll({
-      title: Memo(
+      key: Memo(
+          key: key,
           title: title,
           mainText: mainText,
+          color: color,
           year: year,
           month: month,
           day: day,
@@ -19,8 +21,10 @@ class MemoInfo extends ChangeNotifier {
     });
     final prefs = await SharedPreferences.getInstance();
     await prefs.setStringList('keys', memos.keys.toList());
-    await prefs.setStringList(title, [
+    await prefs.setStringList(key, [
+      title,
       mainText,
+      color,
       year.toString(),
       month.toString(),
       day.toString(),
@@ -47,13 +51,15 @@ class MemoInfo extends ChangeNotifier {
         List<String>? temp = prefs.getStringList(keys[i]);
         memos.addAll({
           keys[i]: Memo(
-              title: keys[i],
-              mainText: temp![0],
-              year: int.parse(temp[1]),
-              month: int.parse(temp[2]),
-              day: int.parse(temp[3]),
-              hour: int.parse(temp[4]),
-              minute: int.parse(temp[5]))
+              key: keys[i],
+              title: temp![0],
+              mainText: temp[1],
+              color: temp[2],
+              year: int.parse(temp[3]),
+              month: int.parse(temp[4]),
+              day: int.parse(temp[5]),
+              hour: int.parse(temp[6]),
+              minute: int.parse(temp[7]))
         });
       }
     }
@@ -64,8 +70,10 @@ class MemoInfo extends ChangeNotifier {
 }
 
 class Memo {
+  late String key;
   late String title;
   late String mainText;
+  late String color;
   late int year;
   late int month;
   late int day;
@@ -73,8 +81,10 @@ class Memo {
   late int minute;
 
   Memo(
-      {required this.title,
+      {required this.key,
+      required this.title,
       required this.mainText,
+      required this.color,
       required this.year,
       required this.month,
       required this.day,
