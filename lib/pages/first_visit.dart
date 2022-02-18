@@ -31,7 +31,6 @@ class FirstVisit extends StatelessWidget {
                       '알림으로 받아보세요\n\n\n',
                       style: TextStyle(fontSize: 30),
                     ),
-                    // Text('first visit\n${value.isFirst}'),
                   ],
                 ),
                 TextButton(

@@ -30,7 +30,6 @@ class MemoList extends StatelessWidget {
                     child: SingleChildScrollView(
                       physics: const BouncingScrollPhysics(),
                       child: Row(
-                        // mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
@@ -64,6 +63,14 @@ Widget memo({required context, required Memo memo}) {
           isSelected = (isSelected) ? false : true;
           // print(isSelected);
           memoInfo.removeMemo(memo.key);
+        } else {
+          showDialog(
+            barrierColor: Colors.white54,
+              context: context,
+              barrierDismissible: false,
+              builder: (context) {
+                return memoDetail(context: context, memo: memo);
+              });
         }
       },
       child: Card(
@@ -75,9 +82,11 @@ Widget memo({required context, required Memo memo}) {
             children: [
               Text(
                 memo.title,
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
                 style: const TextStyle(fontSize: 25),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 3,
               ),
               Text(
@@ -93,5 +102,26 @@ Widget memo({required context, required Memo memo}) {
         ),
       ),
     ),
+  );
+}
+
+AlertDialog memoDetail({required context, required Memo memo}) {
+  return AlertDialog(
+    backgroundColor: Color(int.parse(memo.color.substring(6, 16))),
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+    title: Text(memo.title),
+    content: Text(memo.mainText +
+        '\n\n' +
+        memo.year.toString() + '/' +
+        memo.month.toString() + '/' +
+        memo.day.toString() + '-' +
+        memo.hour.toString() + ':' +
+        memo.minute.toString()),
+    actions: [
+      TextButton(
+          onPressed: () => Navigator.pop(context), child: const Text('확인'))
+    ],
   );
 }

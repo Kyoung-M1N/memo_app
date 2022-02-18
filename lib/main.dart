@@ -1,8 +1,8 @@
+import 'providers/personal_info_provider.dart';
+import 'providers/memo_info_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'providers/memo_info_provider.dart';
-import 'providers/personal_info_provider.dart';
 import 'pages/first_visit.dart';
 import 'pages/home.dart';
 

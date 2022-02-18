@@ -71,9 +71,6 @@ class MemoInfo extends ChangeNotifier {
       }
     }
   }
-
-  @override
-  notifyListeners();
 }
 
 class Memo {
