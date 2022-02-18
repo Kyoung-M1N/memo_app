@@ -5,8 +5,8 @@ class MemoInfo extends ChangeNotifier {
   Map<String, Memo> memos = {};
   bool deleteMode = false;
 
-  void addMemo(String key, String title, String mainText, String color, int year, int month,
-      int day, int hour, int minute) async {
+  void addMemo(String key, String title, String mainText, String color,
+      int year, int month, int day, int hour, int minute) async {
     memos.addAll({
       key: Memo(
           key: key,
@@ -35,12 +35,19 @@ class MemoInfo extends ChangeNotifier {
   }
 
   void removeMode() {
-    deleteMode = true;
+    if (deleteMode == false) {
+      deleteMode = true;
+    } else {
+      deleteMode = false;
+    }
   }
 
-  void removeMemo(String key, String title) async {
+  void removeMemo(String key) async {
     final prefs = await SharedPreferences.getInstance();
-    deleteMode = false;
+    await prefs.remove(key);
+    memos.remove(key);
+    await prefs.setStringList('keys', memos.keys.toList());
+    notifyListeners();
   }
 
   void loadMemo() async {

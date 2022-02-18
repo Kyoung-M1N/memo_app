@@ -47,11 +47,7 @@ class _HomeState extends State<Home> {
             ),
             onPressed: () {
               setState(() {
-                if (memoInfo.deleteMode == false) {
-                  memoInfo.removeMode();
-                } else {
-                  memoInfo.removeMemo('test', 'test');
-                }
+                memoInfo.removeMode();
               });
             },
           )

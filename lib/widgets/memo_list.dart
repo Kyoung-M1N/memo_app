@@ -26,9 +26,11 @@ class MemoList extends StatelessWidget {
                   );
 
                   return Container(
-                    padding: const EdgeInsets.all(4),
+                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 4),
                     child: SingleChildScrollView(
+                      physics: const BouncingScrollPhysics(),
                       child: Row(
+                        // mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Column(
@@ -60,11 +62,12 @@ Widget memo({required context, required Memo memo}) {
       onTap: () {
         if (memoInfo.deleteMode == true) {
           isSelected = (isSelected) ? false : true;
-          print(isSelected);
+          // print(isSelected);
+          memoInfo.removeMemo(memo.key);
         }
       },
       child: Card(
-        color: Color(int.parse(memo.color.substring(6,16))),
+        color: Color(int.parse(memo.color.substring(6, 16))),
         child: Container(
           padding: const EdgeInsets.all(5),
           child: Column(
@@ -73,7 +76,10 @@ Widget memo({required context, required Memo memo}) {
               Text(
                 memo.title,
                 style: const TextStyle(fontSize: 25),
-              ),SizedBox(height: 3,),
+              ),
+              SizedBox(
+                height: 3,
+              ),
               Text(
                 memo.mainText,
                 maxLines: 9,
