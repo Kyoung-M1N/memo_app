@@ -100,7 +100,7 @@ Widget checkBox({
             ),
             borderRadius: BorderRadius.circular(20)),
         fillColor: color,
-        constraints: BoxConstraints.tightFor(width: 30, height: 30),
+        constraints: const BoxConstraints.tightFor(width: 30, height: 30),
       ),
     );
 

@@ -1,9 +1,10 @@
-import 'package:flutter/material.dart';
-import 'package:memo_app/pages/memo_set.dart';
+import 'package:memo_app/pages/setting.dart';
+import 'package:memo_app/providers/personal_info_provider.dart';
 import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:memo_app/widgets/memo_list.dart';
+import 'package:memo_app/pages/memo_set.dart';
 import 'package:provider/provider.dart';
-import 'package:memo_app/providers/personal_info_provider.dart';
+import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -64,6 +65,14 @@ class _HomeState extends State<Home> {
                   onTap: () {
                     value.reverse();
                   },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.settings),
+                  title: const Text('설정'),
+                  onTap: () {
+                    Navigator.push(context, MaterialPageRoute<void>(
+                  builder: (BuildContext context) => const Setting()));
+                  },
                 )
               ],
             ),
@@ -71,7 +80,7 @@ class _HomeState extends State<Home> {
         },
       ),
       body: const MemoList(),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: (memoInfo.deleteMode)?null:FloatingActionButton(
         backgroundColor: Colors.white,
         onPressed: () {
           Navigator.push(

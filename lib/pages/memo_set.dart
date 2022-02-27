@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:memo_app/widgets/palette.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 class MemoSet extends StatefulWidget {
   const MemoSet({Key? key}) : super(key: key);
@@ -87,7 +87,6 @@ class _MemoSetState extends State<MemoSet> {
               Palette(
                 onChanged: (value) {
                   color = value.toString();
-                  // print();
                 },
               ),
               SizedBox(

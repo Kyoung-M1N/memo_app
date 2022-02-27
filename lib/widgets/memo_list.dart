@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:memo_app/providers/memo_info_provider.dart';
+import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
 
 class MemoList extends StatelessWidget {
   const MemoList({Key? key}) : super(key: key);
@@ -65,7 +65,7 @@ Widget memo({required context, required Memo memo}) {
           memoInfo.removeMemo(memo.key);
         } else {
           showDialog(
-            barrierColor: Colors.white54,
+              barrierColor: Colors.white54,
               context: context,
               barrierDismissible: false,
               builder: (context) {
@@ -114,14 +114,20 @@ AlertDialog memoDetail({required context, required Memo memo}) {
     title: Text(memo.title),
     content: Text(memo.mainText +
         '\n\n' +
-        memo.year.toString() + '/' +
-        memo.month.toString() + '/' +
-        memo.day.toString() + '-' +
-        memo.hour.toString() + ':' +
+        memo.year.toString() +
+        '/' +
+        memo.month.toString() +
+        '/' +
+        memo.day.toString() +
+        '-' +
+        memo.hour.toString() +
+        ':' +
         memo.minute.toString()),
     actions: [
       TextButton(
-          onPressed: () => Navigator.pop(context), child: const Text('확인'))
+        onPressed: () => Navigator.pop(context),
+        child: const Text('확인'),
+      )
     ],
   );
 }
