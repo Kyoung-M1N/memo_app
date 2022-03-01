@@ -112,4 +112,6 @@ class MemoColor {
   static Color purple = const Color(0xFFC1BDE1);
   static Color grey = const Color(0xFFD4D4D4);
   static Color white = const Color(0xFFFFFFFF);
+  static Color darkAppBar = const Color(0xFF2E3136);
+  static Color darkBackGround = const Color(0xFF1F1F1F);
 }

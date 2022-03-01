@@ -3,6 +3,7 @@ import 'package:memo_app/providers/personal_info_provider.dart';
 import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:memo_app/widgets/memo_list.dart';
 import 'package:memo_app/pages/memo_set.dart';
+import 'package:memo_app/widgets/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -16,22 +17,26 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
+    PersonalInfo personalInfo = Provider.of<PersonalInfo>(context);
     MemoInfo memoInfo = Provider.of<MemoInfo>(context);
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor:
+          (personalInfo.isDarkMode) ? MemoColor.darkBackGround : Colors.white,
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.white,
-        title: const Text(
+        backgroundColor:
+            (personalInfo.isDarkMode) ? MemoColor.darkAppBar : Colors.white,
+        title: Text(
           'M E M O',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+              color: (personalInfo.isDarkMode) ? Colors.white : Colors.black),
         ),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.menu,
-                color: Colors.black,
+                color: (personalInfo.isDarkMode) ? Colors.white : Colors.black,
               ),
               onPressed: () {
                 Scaffold.of(context).openDrawer();
@@ -44,7 +49,11 @@ class _HomeState extends State<Home> {
           IconButton(
             icon: Icon(
               Icons.delete_outline,
-              color: (memoInfo.deleteMode == false) ? Colors.black : Colors.red,
+              color: (memoInfo.deleteMode == false)
+                  ? (personalInfo.isDarkMode)
+                      ? Colors.white
+                      : Colors.black
+                  : Colors.red,
             ),
             onPressed: () {
               setState(() {
@@ -57,21 +66,50 @@ class _HomeState extends State<Home> {
       drawer: Consumer<PersonalInfo>(
         builder: (context, value, child) {
           return Drawer(
+            backgroundColor:
+                (personalInfo.isDarkMode) ? MemoColor.darkAppBar : Colors.white,
             child: ListView(
               children: [
                 ListTile(
-                  leading: const Icon(Icons.backspace),
-                  title: const Text('Go to First'),
+                  leading: Icon(
+                    Icons.backspace,
+                    color: (personalInfo.isDarkMode)
+                        ? Colors.white
+                        : Colors.grey[700],
+                  ),
+                  title: Text(
+                    'Go to First',
+                    style: TextStyle(
+                      color: (personalInfo.isDarkMode)
+                          ? Colors.white
+                          : Colors.grey[700],
+                    ),
+                  ),
                   onTap: () {
                     value.reverse();
                   },
                 ),
                 ListTile(
-                  leading: const Icon(Icons.settings),
-                  title: const Text('설정'),
+                  leading: Icon(
+                    Icons.settings,
+                    color: (personalInfo.isDarkMode)
+                        ? Colors.white
+                        : Colors.grey[700],
+                  ),
+                  title: Text(
+                    '설정',
+                    style: TextStyle(
+                      color: (personalInfo.isDarkMode)
+                          ? Colors.white
+                          : Colors.grey[700],
+                    ),
+                  ),
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const Setting()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute<void>(
+                            builder: (BuildContext context) =>
+                                const Setting()));
                   },
                 )
               ],
@@ -80,19 +118,23 @@ class _HomeState extends State<Home> {
         },
       ),
       body: const MemoList(),
-      floatingActionButton: (memoInfo.deleteMode)?null:FloatingActionButton(
-        backgroundColor: Colors.white,
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute<void>(
-                  builder: (BuildContext context) => const MemoSet()));
-        },
-        child: const Icon(
-          Icons.add,
-          color: Colors.black,
-        ),
-      ),
+      floatingActionButton: (memoInfo.deleteMode)
+          ? null
+          : FloatingActionButton(
+              backgroundColor: (personalInfo.isDarkMode)
+                  ? MemoColor.darkAppBar
+                  : Colors.white,
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute<void>(
+                        builder: (BuildContext context) => const MemoSet()));
+              },
+              child: Icon(
+                Icons.add,
+                color: (personalInfo.isDarkMode) ? Colors.white : Colors.black,
+              ),
+            ),
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:memo_app/providers/memo_info_provider.dart';
+import 'package:memo_app/providers/personal_info_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -50,6 +51,7 @@ class MemoList extends StatelessWidget {
 }
 
 Widget memo({required context, required Memo memo}) {
+  PersonalInfo personalInfo = Provider.of<PersonalInfo>(context);
   MemoInfo memoInfo = Provider.of<MemoInfo>(context);
   bool isSelected = false;
   return Container(
@@ -65,7 +67,8 @@ Widget memo({required context, required Memo memo}) {
           memoInfo.removeMemo(memo.key);
         } else {
           showDialog(
-              barrierColor: Colors.white54,
+              barrierColor:
+                  (personalInfo.isDarkMode) ? Colors.black54 : Colors.white54,
               context: context,
               barrierDismissible: false,
               builder: (context) {

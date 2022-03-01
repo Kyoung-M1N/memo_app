@@ -35,10 +35,13 @@ class PersonalInfo extends ChangeNotifier {
     final prefs = await SharedPreferences.getInstance();
     _isFirst = prefs.getBool('isFirst') ?? true;
     _name = prefs.getString('name') ?? 'none';
+    _isDarkMode = prefs.getBool('isDarkMode') ?? false;
     notifyListeners();
   }
 
-  void changeTheme(bool value){
+  void changeTheme(bool value) async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('isDarkMode', value);
     _isDarkMode = value;
     notifyListeners();
   }
