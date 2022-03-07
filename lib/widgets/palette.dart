@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 
 class Palette extends StatefulWidget {
   final Function(Color)? onChanged;
+  final bool isDarkMode;
   const Palette({
     Key? key,
     required this.onChanged,
+    required this.isDarkMode,
   }) : super(key: key);
 
   @override
@@ -16,76 +18,89 @@ class _PaletteState extends State<Palette> {
 
   @override
   Widget build(BuildContext context) {
-    return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-      checkBox(
-          selectedColor: currentValue,
-          color: MemoColor.white,
-          onPressed: () {
-            setState(() {
-              currentValue = MemoColor.white;
-            });
-            widget.onChanged!(currentValue);
-          }),
-      checkBox(
-          selectedColor: currentValue,
-          color: MemoColor.pink,
-          onPressed: () {
-            setState(() {
-              currentValue = MemoColor.pink;
-            });
-            widget.onChanged!(currentValue);
-          }),
-      checkBox(
-          selectedColor: currentValue,
-          color: MemoColor.yellow,
-          onPressed: () {
-            setState(() {
-              currentValue = MemoColor.yellow;
-            });
-            widget.onChanged!(currentValue);
-          }),
-      checkBox(
-          selectedColor: currentValue,
-          color: MemoColor.green,
-          onPressed: () {
-            setState(() {
-              currentValue = MemoColor.green;
-            });
-            widget.onChanged!(currentValue);
-          }),
-      checkBox(
-          selectedColor: currentValue,
-          color: MemoColor.blue,
-          onPressed: () {
-            setState(() {
-              currentValue = MemoColor.blue;
-            });
-            widget.onChanged!(currentValue);
-          }),
-      checkBox(
-          selectedColor: currentValue,
-          color: MemoColor.purple,
-          onPressed: () {
-            setState(() {
-              currentValue = MemoColor.purple;
-            });
-            widget.onChanged!(currentValue);
-          }),
-      checkBox(
-          selectedColor: currentValue,
-          color: MemoColor.grey,
-          onPressed: () {
-            setState(() {
-              currentValue = MemoColor.grey;
-            });
-            widget.onChanged!(currentValue);
-          }),
-    ]);
+    return Container(margin: const EdgeInsets.fromLTRB(16, 0, 16, 0),
+      child: SingleChildScrollView(physics: const BouncingScrollPhysics(),
+      scrollDirection :Axis.horizontal,
+        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+          checkBox(
+              selectedColor: currentValue,
+              borderColor: (widget.isDarkMode)?Color(0xFFD6D6D6):Colors.black,
+              color: MemoColor.white,
+              onPressed: () {
+                setState(() {
+                  currentValue = MemoColor.white;
+                });
+                widget.onChanged!(currentValue);
+              }),
+          checkBox(
+              selectedColor: currentValue,
+              borderColor: (widget.isDarkMode)?Color(0xFFD6D6D6):Colors.black,
+              color: MemoColor.pink,
+              onPressed: () {
+                setState(() {
+                  currentValue = MemoColor.pink;
+                });
+                widget.onChanged!(currentValue);
+              }),
+          checkBox(
+              selectedColor: currentValue,
+              borderColor: (widget.isDarkMode)?Color(0xFFD6D6D6):Colors.black,
+              color: MemoColor.yellow,
+              onPressed: () {
+                setState(() {
+                  currentValue = MemoColor.yellow;
+                });
+                widget.onChanged!(currentValue);
+              }),
+          checkBox(
+              selectedColor: currentValue,
+              borderColor: (widget.isDarkMode)?Color(0xFFD6D6D6):Colors.black,
+              color: MemoColor.green,
+              onPressed: () {
+                setState(() {
+                  currentValue = MemoColor.green;
+                });
+                widget.onChanged!(currentValue);
+              }),
+          checkBox(
+              selectedColor: currentValue,
+              borderColor: (widget.isDarkMode)?Color(0xFFD6D6D6):Colors.black,
+              color: MemoColor.blue,
+              onPressed: () {
+                setState(() {
+                  currentValue = MemoColor.blue;
+                });
+                widget.onChanged!(currentValue);
+              }),
+          checkBox(
+              selectedColor: currentValue,
+              borderColor: (widget.isDarkMode)?Color(0xFFD6D6D6):Colors.black,
+              color: MemoColor.purple,
+              onPressed: () {
+                setState(() {
+                  currentValue = MemoColor.purple;
+                });
+                widget.onChanged!(currentValue);
+              }),
+          checkBox(
+              selectedColor: currentValue,
+              borderColor: (widget.isDarkMode)?Color(0xFFD6D6D6):Colors.black,
+              color: MemoColor.grey,
+              onPressed: () {
+                setState(() {
+                  currentValue = MemoColor.grey;
+                });
+                widget.onChanged!(currentValue);
+              }),
+        ]),
+      ),
+    );
   }
 }
 
 Widget checkBox({
   required Color color,
+  required Color borderColor,
   required Color selectedColor,
   required void Function()? onPressed,
 }) =>
@@ -96,7 +111,7 @@ Widget checkBox({
         shape: RoundedRectangleBorder(
             side: BorderSide(
               width: 1.3,
-              color: (color == selectedColor) ? Colors.blue : Colors.black,
+              color: (color == selectedColor) ? Colors.blue : borderColor,
             ),
             borderRadius: BorderRadius.circular(20)),
         fillColor: color,

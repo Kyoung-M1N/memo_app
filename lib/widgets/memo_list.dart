@@ -1,5 +1,5 @@
-import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:memo_app/providers/personal_info_provider.dart';
+import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 

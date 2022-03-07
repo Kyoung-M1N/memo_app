@@ -1,4 +1,5 @@
 import 'package:memo_app/providers/memo_info_provider.dart';
+import 'package:memo_app/providers/personal_info_provider.dart';
 import 'package:memo_app/widgets/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -23,23 +24,28 @@ class _MemoSetState extends State<MemoSet> {
 
   @override
   Widget build(BuildContext context) {
+    PersonalInfo personalInfo =
+        Provider.of<PersonalInfo>(context, listen: false);
     MemoInfo memoInfo = Provider.of<MemoInfo>(context, listen: false);
     return Scaffold(
-      backgroundColor: const Color(0xFFFFFFFF),
+      backgroundColor:
+          (personalInfo.isDarkMode) ? MemoColor.darkBackGround : Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
-        backgroundColor: Colors.white,
-        title: const Text(
+        backgroundColor:
+            (personalInfo.isDarkMode) ? MemoColor.darkBackGround : Colors.white,
+        title: Text(
           '메모 추가',
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(
+              color: (personalInfo.isDarkMode) ? Colors.white : Colors.black),
         ),
         leading: Builder(
           builder: (BuildContext context) {
             return IconButton(
-              icon: const Icon(
+              icon: Icon(
                 Icons.arrow_back_ios,
-                color: Colors.black,
+                color: (personalInfo.isDarkMode) ? Colors.white : Colors.black,
               ),
               onPressed: () {
                 Navigator.pop(context);
@@ -61,7 +67,12 @@ class _MemoSetState extends State<MemoSet> {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 32,
                 child: TextField(
-                  decoration: inputDecoration(label: 'Title'),
+                  style: TextStyle(
+                      color: (personalInfo.isDarkMode)
+                          ? Colors.white
+                          : Colors.black),
+                  decoration: inputDecoration(
+                      label: 'Title', isDarkMode: personalInfo.isDarkMode),
                   onChanged: (value) {
                     setState(() {
                       title = value;
@@ -75,8 +86,13 @@ class _MemoSetState extends State<MemoSet> {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 32,
                 child: TextField(
+                  style: TextStyle(
+                      color: (personalInfo.isDarkMode)
+                          ? Colors.white
+                          : Colors.black),
                   maxLines: 16,
-                  decoration: inputDecoration(label: 'Main text'),
+                  decoration: inputDecoration(
+                      label: 'Main text', isDarkMode: personalInfo.isDarkMode),
                   onChanged: (value) {
                     setState(() {
                       mainText = value;
@@ -85,6 +101,7 @@ class _MemoSetState extends State<MemoSet> {
                 ),
               ),
               Palette(
+                isDarkMode: personalInfo.isDarkMode,
                 onChanged: (value) {
                   color = value.toString();
                 },
@@ -92,20 +109,29 @@ class _MemoSetState extends State<MemoSet> {
               SizedBox(
                   width: MediaQuery.of(context).size.width - 16,
                   height: 200,
-                  child: CupertinoDatePicker(onDateTimeChanged: (datetime) {
-                    setState(() {
-                      year = datetime.year;
-                      month = datetime.month;
-                      day = datetime.day;
-                      hour = datetime.hour;
-                      minute = datetime.minute;
-                    });
-                  })),
+                  child: CupertinoTheme(
+                    data: CupertinoThemeData(
+                        textTheme: CupertinoTextThemeData(
+                            dateTimePickerTextStyle: TextStyle(
+                                color: (personalInfo.isDarkMode)
+                                    ? Colors.white
+                                    : Colors.black))),
+                    child: CupertinoDatePicker(onDateTimeChanged: (datetime) {
+                      setState(() {
+                        year = datetime.year;
+                        month = datetime.month;
+                        day = datetime.day;
+                        hour = datetime.hour;
+                        minute = datetime.minute;
+                      });
+                    }),
+                  )),
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: TextButton(
                   style:
-                      const ButtonStyle(splashFactory: NoSplash.splashFactory),
+                      const ButtonStyle(splashFactory: NoSplash.splashFactory,
+                      ),
                   onPressed: (title != null && mainText != null)
                       ? () {
                           String key = DateTime.now().year.toString() +
@@ -130,14 +156,17 @@ class _MemoSetState extends State<MemoSet> {
   }
 }
 
-InputDecoration inputDecoration({required label}) => InputDecoration(
+InputDecoration inputDecoration({required label, required bool isDarkMode}) =>
+    InputDecoration(
       labelText: label,
+      labelStyle: TextStyle(color: Colors.grey[400]),
       focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(width: 1, color: Colors.blue),
       ),
-      enabledBorder: const OutlineInputBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-        borderSide: BorderSide(width: 1),
+      enabledBorder: OutlineInputBorder(
+        borderRadius: const BorderRadius.all(Radius.circular(10)),
+        borderSide: BorderSide(
+            width: 1, color: (isDarkMode) ? Colors.white : Colors.black),
       ),
     );
