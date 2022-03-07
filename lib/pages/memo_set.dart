@@ -67,6 +67,7 @@ class _MemoSetState extends State<MemoSet> {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 32,
                 child: TextField(
+                  textCapitalization: TextCapitalization.sentences,
                   style: TextStyle(
                       color: (personalInfo.isDarkMode)
                           ? Colors.white
@@ -86,6 +87,7 @@ class _MemoSetState extends State<MemoSet> {
               SizedBox(
                 width: MediaQuery.of(context).size.width - 32,
                 child: TextField(
+                  textCapitalization: TextCapitalization.sentences,
                   style: TextStyle(
                       color: (personalInfo.isDarkMode)
                           ? Colors.white
@@ -129,9 +131,9 @@ class _MemoSetState extends State<MemoSet> {
               Container(
                 margin: const EdgeInsets.fromLTRB(0, 20, 0, 0),
                 child: TextButton(
-                  style:
-                      const ButtonStyle(splashFactory: NoSplash.splashFactory,
-                      ),
+                  style: const ButtonStyle(
+                    splashFactory: NoSplash.splashFactory,
+                  ),
                   onPressed: (title != null && mainText != null)
                       ? () {
                           String key = DateTime.now().year.toString() +
