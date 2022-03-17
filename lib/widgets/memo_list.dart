@@ -8,15 +8,15 @@ class MemoList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<MemoInfo>(
-      builder: (context, value, child) {
-        return (value.memos.isEmpty)
-            ? const Center(child: Text('아직 메모가 없습니다'))
+    return Consumer2<MemoInfo, PersonalInfo>(
+      builder: (context, memoInfo, personalInfo, child) {
+        return (memoInfo.memos.isEmpty)
+            ? Center(child: Text('아직 메모가 없습니다', style: TextStyle(color: (personalInfo.isDarkMode) ? Colors.white : Colors.black)))
             : Builder(
                 builder: (context) {
                   List<Widget> memosList1 = [];
                   List<Widget> memosList2 = [];
-                  value.memos.forEach(
+                  memoInfo.memos.forEach(
                     (key, value) {
                       if (memosList2.length == memosList1.length) {
                         memosList1.add(memo(context: context, memo: value));

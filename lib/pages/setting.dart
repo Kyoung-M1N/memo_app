@@ -10,8 +10,7 @@ class Setting extends StatelessWidget {
   Widget build(BuildContext context) {
     PersonalInfo personalInfo = Provider.of<PersonalInfo>(context);
     return Scaffold(
-      backgroundColor:
-          (personalInfo.isDarkMode) ? Colors.black : Colors.white,
+      backgroundColor: (personalInfo.isDarkMode) ? Colors.black : Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,

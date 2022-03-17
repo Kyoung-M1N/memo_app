@@ -28,8 +28,7 @@ class _MemoSetState extends State<MemoSet> {
         Provider.of<PersonalInfo>(context, listen: false);
     MemoInfo memoInfo = Provider.of<MemoInfo>(context, listen: false);
     return Scaffold(
-      backgroundColor:
-          (personalInfo.isDarkMode) ? Colors.black : Colors.white,
+      backgroundColor: (personalInfo.isDarkMode) ? Colors.black : Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
@@ -150,9 +149,11 @@ class _MemoSetState extends State<MemoSet> {
                   child: Text(
                     'OK',
                     style: TextStyle(
-                        color: (personalInfo.isDarkMode)
-                            ? Colors.white
-                            : Colors.black),
+                        color: (title != null && mainText != null)
+                            ? (personalInfo.isDarkMode)
+                                ? Colors.white
+                                : Colors.black
+                            : Colors.grey),
                   ),
                 ),
               )

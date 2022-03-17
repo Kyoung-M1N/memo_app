@@ -19,8 +19,7 @@ class _HomeState extends State<Home> {
     PersonalInfo personalInfo = Provider.of<PersonalInfo>(context);
     MemoInfo memoInfo = Provider.of<MemoInfo>(context);
     return Scaffold(
-      backgroundColor:
-          (personalInfo.isDarkMode) ? Colors.black : Colors.white,
+      backgroundColor: (personalInfo.isDarkMode) ? Colors.black : Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor:
@@ -66,7 +65,7 @@ class _HomeState extends State<Home> {
         builder: (context, value, child) {
           return Drawer(
             backgroundColor:
-                (personalInfo.isDarkMode) ? Colors.black : Colors.white,
+                (personalInfo.isDarkMode) ? const Color(0xFF1F1F1F) : Colors.white,
             child: ListView(
               children: [
                 ListTile(
@@ -121,7 +120,7 @@ class _HomeState extends State<Home> {
           ? null
           : FloatingActionButton(
               backgroundColor: (personalInfo.isDarkMode)
-                  ? Colors.black
+                  ? const Color(0xFF1F1F1F)
                   : Colors.white,
               onPressed: () {
                 Navigator.push(
