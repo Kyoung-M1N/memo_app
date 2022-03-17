@@ -1,5 +1,4 @@
 import 'package:memo_app/providers/personal_info_provider.dart';
-import 'package:memo_app/widgets/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -12,12 +11,12 @@ class Setting extends StatelessWidget {
     PersonalInfo personalInfo = Provider.of<PersonalInfo>(context);
     return Scaffold(
       backgroundColor:
-          (personalInfo.isDarkMode) ? MemoColor.darkBackGround : Colors.white,
+          (personalInfo.isDarkMode) ? Colors.black : Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         backgroundColor:
-            (personalInfo.isDarkMode) ? MemoColor.darkAppBar : Colors.white,
+            (personalInfo.isDarkMode) ? Colors.black : Colors.white,
         title: Text(
           '설정',
           style: TextStyle(

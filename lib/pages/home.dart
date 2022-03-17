@@ -1,9 +1,8 @@
-import 'package:memo_app/pages/setting.dart';
 import 'package:memo_app/providers/personal_info_provider.dart';
 import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:memo_app/widgets/memo_list.dart';
-import 'package:memo_app/widgets/palette.dart';
 import 'package:memo_app/pages/memo_set.dart';
+import 'package:memo_app/pages/setting.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 
@@ -21,11 +20,11 @@ class _HomeState extends State<Home> {
     MemoInfo memoInfo = Provider.of<MemoInfo>(context);
     return Scaffold(
       backgroundColor:
-          (personalInfo.isDarkMode) ? MemoColor.darkBackGround : Colors.white,
+          (personalInfo.isDarkMode) ? Colors.black : Colors.white,
       appBar: AppBar(
         centerTitle: true,
         backgroundColor:
-            (personalInfo.isDarkMode) ? MemoColor.darkAppBar : Colors.white,
+            (personalInfo.isDarkMode) ? Colors.black : Colors.white,
         title: Text(
           'M E M O',
           style: TextStyle(
@@ -67,7 +66,7 @@ class _HomeState extends State<Home> {
         builder: (context, value, child) {
           return Drawer(
             backgroundColor:
-                (personalInfo.isDarkMode) ? MemoColor.darkAppBar : Colors.white,
+                (personalInfo.isDarkMode) ? Colors.black : Colors.white,
             child: ListView(
               children: [
                 ListTile(
@@ -122,7 +121,7 @@ class _HomeState extends State<Home> {
           ? null
           : FloatingActionButton(
               backgroundColor: (personalInfo.isDarkMode)
-                  ? MemoColor.darkAppBar
+                  ? Colors.black
                   : Colors.white,
               onPressed: () {
                 Navigator.push(

@@ -1,5 +1,5 @@
-import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:memo_app/providers/personal_info_provider.dart';
+import 'package:memo_app/providers/memo_info_provider.dart';
 import 'package:memo_app/widgets/palette.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/cupertino.dart';
@@ -29,12 +29,12 @@ class _MemoSetState extends State<MemoSet> {
     MemoInfo memoInfo = Provider.of<MemoInfo>(context, listen: false);
     return Scaffold(
       backgroundColor:
-          (personalInfo.isDarkMode) ? MemoColor.darkBackGround : Colors.white,
+          (personalInfo.isDarkMode) ? Colors.black : Colors.white,
       appBar: AppBar(
         elevation: 0,
         centerTitle: true,
         backgroundColor:
-            (personalInfo.isDarkMode) ? MemoColor.darkBackGround : Colors.white,
+            (personalInfo.isDarkMode) ? Colors.black : Colors.white,
         title: Text(
           '메모 추가',
           style: TextStyle(
@@ -147,7 +147,13 @@ class _MemoSetState extends State<MemoSet> {
                           Navigator.pop(context);
                         }
                       : null,
-                  child: const Text('OK'),
+                  child: Text(
+                    'OK',
+                    style: TextStyle(
+                        color: (personalInfo.isDarkMode)
+                            ? Colors.white
+                            : Colors.black),
+                  ),
                 ),
               )
             ],
@@ -161,7 +167,7 @@ class _MemoSetState extends State<MemoSet> {
 InputDecoration inputDecoration({required label, required bool isDarkMode}) =>
     InputDecoration(
       labelText: label,
-      labelStyle: TextStyle(color: Colors.grey[400]),
+      labelStyle: TextStyle(color: (isDarkMode) ? Colors.white : Colors.black),
       focusedBorder: const OutlineInputBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
         borderSide: BorderSide(width: 1, color: Colors.blue),

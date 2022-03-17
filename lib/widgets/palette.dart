@@ -29,8 +29,9 @@ class _PaletteState extends State<Palette> {
             result.add(
               checkBox(
                   selectedColor: currentValue,
-                  borderColor:
-                      (widget.isDarkMode) ? const Color(0xFFD6D6D6) : Colors.black,
+                  borderColor: (widget.isDarkMode)
+                      ? const Color(0xFFD6D6D6)
+                      : Colors.black,
                   color: element,
                   onPressed: () {
                     setState(() {
@@ -73,9 +74,11 @@ class MemoColor {
   static List<Color> cardColors = [
     white,
     pink,
+    orange,
     yellow,
     green,
     blue,
+    indigo,
     purple,
     grey,
     neonPink,
@@ -87,11 +90,13 @@ class MemoColor {
     neonPurple
   ];
   static Color white = const Color(0xFFFFFFFF);
-  static Color pink = const Color(0xFFFBDAD2);
+  static Color pink = const Color(0xFFFDCBCE);
+  static Color orange = const Color(0xFFFFD4B9);
   static Color yellow = const Color(0xFFFFECB2);
-  static Color green = const Color(0xFFBAE4C7);
-  static Color blue = const Color(0xFFBADDE5);
-  static Color purple = const Color(0xFFC1BDE1);
+  static Color green = const Color(0xFFC4E6C3);
+  static Color blue = const Color(0xFFB5E6F4);
+  static Color indigo = const Color(0xFFAFC4E7);
+  static Color purple = const Color(0xFFD8D4ED);
   static Color grey = const Color(0xFFD4D4D4);
   static Color neonPink = const Color(0xFFF95DE1);
   static Color neonOrange = const Color(0xFFF2A85A);
@@ -100,6 +105,6 @@ class MemoColor {
   static Color neonMint = const Color(0xFF5BF5E5);
   static Color neonBlue = const Color(0xFF0385E5);
   static Color neonPurple = const Color(0xFF8000FF);
-  static Color darkAppBar = const Color(0xFF2E3136);
-  static Color darkBackGround = const Color(0xFF1F1F1F);
+  // static Color darkAppBar = const Color(0xFF2E3136);
+  // static Color darkBackGround = const Color(0xFF1F1F1F);
 }
